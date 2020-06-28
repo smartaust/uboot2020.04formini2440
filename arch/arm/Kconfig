@@ -780,6 +780,13 @@ config ARCH_MEDIATEK
 	  Support for the MediaTek SoCs family developed by MediaTek Inc.
 	  Please refer to doc/README.mediatek for more information.
 
+config ARCH_S3C24XX
+	bool "Samsung S3C24XX SoCs"
+	help
+	  Support for the samsung s3c24xx SoCs family developed by wdren.
+	  Please refer to doc/README for more information.
+
+
 config ARCH_LPC32XX
 	bool "NXP LPC32xx platform"
 	select CPU_ARM926EJS
@@ -1771,6 +1778,8 @@ source "arch/arm/mach-rmobile/Kconfig"
 source "arch/arm/mach-meson/Kconfig"
 
 source "arch/arm/mach-mediatek/Kconfig"
+
+source "arch/arm/mach-s3c24xx/Kconfig"
 
 source "arch/arm/mach-qemu/Kconfig"
 

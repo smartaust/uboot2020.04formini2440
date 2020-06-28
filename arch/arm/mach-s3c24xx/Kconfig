@@ -1,0 +1,31 @@
+if ARCH_S3C24XX
+
+config SYS_SOC
+	default "S3C2440"
+
+config SYS_VENDOR
+	default "SAMSUNG"
+
+config S3C2440
+	bool "SAMSUNG S3C2440 SoC"
+	default n
+
+choice
+	prompt "S3C24XX board select"
+
+config TARGET_MINI2440
+	bool "Friendly ARM mini2440 Board"
+	help
+	  The SAMSUNG is a ARM-based SoC with a arm920T core.
+	  including UART, SPI, USB1.0, SD and MMC cards, NAND , PWM,
+	  Gigabit Ethernet, I2C.
+
+config TARGET_TBD
+	bool "SAMSUNG S3C24XX SoC"
+	help
+	  TBD: use to extern new board
+endchoice
+
+source "board/samsung/mini2440/Kconfig"
+
+endif
