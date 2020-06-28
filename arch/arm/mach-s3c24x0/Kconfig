@@ -1,17 +1,16 @@
-if ARCH_S3C24XX
+if ARCH_S3C24X0
 
 config SYS_SOC
-	default "S3C2440"
+	default "S3C24x0"
 
 config SYS_VENDOR
 	default "SAMSUNG"
 
-config S3C2440
-	bool "SAMSUNG S3C2440 SoC"
-	default n
-
+config S3C24X0
+	bool "SAMSUNG S3C24X0 SoC"
+	default y
 choice
-	prompt "S3C24XX board select"
+	prompt "S3C24X0 board select"
 
 config TARGET_MINI2440
 	bool "Friendly ARM mini2440 Board"

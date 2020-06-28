@@ -9,4 +9,7 @@ config SYS_VENDOR
 config SYS_CONFIG_NAME
 	default "mini2440"
 
+config S3C2440
+	bool "SAMSUNG S3C2440 SoC"
+	default y
 endif
