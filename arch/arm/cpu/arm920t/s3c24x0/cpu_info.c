@@ -33,7 +33,7 @@ int print_cpuinfo(void)
 	ulong cpuid;
 	struct s3c24x0_gpio * const gpio = s3c24x0_get_base_gpio();
 
-	cpuid = readl(&gpio->gstatus1);
+//	cpuid = readl(&gpio->gstatus1);
 	printf("CPUID: %8lX\n", cpuid);
 #endif
 	for (i = 0; i < ARRAY_SIZE(freq_f); i++)

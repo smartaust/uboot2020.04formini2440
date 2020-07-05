@@ -70,6 +70,8 @@ obj-$(CONFIG_OWL_SERIAL) += serial_owl.o
 obj-$(CONFIG_OMAP_SERIAL) += serial_omap.o
 obj-$(CONFIG_MTK_SERIAL) += serial_mtk.o
 obj-$(CONFIG_SIFIVE_SERIAL) += serial_sifive.o
+obj-$(CONFIG_S3C24X0_SERIAL) += serial_s3c24x0.o
+
 
 ifndef CONFIG_SPL_BUILD
 obj-$(CONFIG_USB_TTY) += usbtty.o

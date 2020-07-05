@@ -797,6 +797,29 @@ config MTK_SERIAL
 	  The High-speed UART is compatible with the ns16550a UART and have
 	  its own high-speed registers.
 
+config S3C24X0_SERIAL
+	bool "S3C24X0 serial support"
+	help
+	  S3C24X0 serial support.
+
+choice
+	prompt "select serial number"
+	default SERIAL1
+	depends on S3C24X0_SERIAL
+	help
+	  Set this to match the S3C24X0 SOC UART number of the serial console.
+
+config SERIAL1
+	bool "UART0"
+
+config SERIAL2
+	bool "UART1"
+
+config SERIAL3
+	bool "UART2"
+
+endchoice
+
 config MPC8XX_CONS
 	bool "Console driver for MPC8XX"
 	depends on MPC8xx
