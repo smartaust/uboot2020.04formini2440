@@ -133,6 +133,7 @@ static int init_baud_rate(void)
 
 static int display_text_info(void)
 {
+
 #if !defined(CONFIG_SANDBOX) && !defined(CONFIG_EFI_APP)
 	ulong bss_start, bss_end, text_base;
 
@@ -874,6 +875,7 @@ __weak int clear_bss(void)
 
 static const init_fnc_t init_sequence_f[] = {
 	setup_mon_len,
+    //board_init,
 #ifdef CONFIG_OF_CONTROL
 	fdtdec_setup,
 #endif

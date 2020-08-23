@@ -12,7 +12,7 @@
 #include <post.h>
 #include <linux/compiler.h>
 #include <errno.h>
-
+#include <asm/arch/s3c2440.h>
 DECLARE_GLOBAL_DATA_PTR;
 
 static struct serial_device *serial_devices;
@@ -349,6 +349,11 @@ static struct serial_device *get_current(void)
  */
 int serial_init(void)
 {
+    //gpio init here
+    struct s3c24x0_gpio * const gpio = s3c24x0_get_base_gpio();
+    gpio->GPHCON |= 0xa0;
+    gpio->GPHUP  |= 0xc0;
+
 	gd->flags |= GD_FLG_SERIAL_READY;
 	return get_current()->start();
 }

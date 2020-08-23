@@ -2,6 +2,6 @@
 #
 # Copyright (C) 2012 Samsung Electronics
 
-obj-y	+= lowlevel_init.o
-obj-y	+= nandflash.o
+extra-y	+= lowlevel_init.o
+extra-y	+= nandflash.o
 obj-y	+= mini2440.o

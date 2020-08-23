@@ -49,6 +49,45 @@ copyex:
 	bne	copyex
 #endif
 
+#ifdef CONFIG_S3C2440
+    #define pWTCON	0x53000000
+    #define INTMSK	0x4A000008	/* Interupt-Controller base addresses */
+    #define INTSUBMSK	0x4A00001C
+    #define CLKDIVN	0x4C000014	/* clock divisor register */
+
+	ldr	r0, =pWTCON
+	mov	r1, #0x0
+	str	r1, [r0]
+
+    /*
+    * mask all IRQs by setting all bits in the INTMR - default
+    */
+	mov	r1, #0xffffffff
+	ldr	r0, =INTMSK
+	str	r1, [r0]
+
+	ldr     r1, =0x3fff
+	ldr     r0, =INTSUBMSK
+    str     r1, [r0]
+
+    #define	MPLLCON	0x4c000004
+    #define UPLLCON 0x4c000008
+
+	/* FCLK:HCLK:PCLK = 1:2:4 */
+	/* default FCLK is 405 MHz ! */
+	ldr	r0, =CLKDIVN
+	mov	r1, #5
+	str	r1, [r0]
+
+	ldr r0, =MPLLCON
+	ldr r1, =(0x7f<<12)|(0x02<<4)|(0x01)
+	str r1, [r0]
+
+	ldr r0, =UPLLCON
+	ldr r1, =(0x38<<12)|(0x02<<4)|(0x02)
+	str r1, [r0]
+
+#endif
 	/*
 	 * we do sys-critical inits only at reboot,
 	 * not when booting from ram!
@@ -57,7 +96,23 @@ copyex:
 	bl	cpu_init_crit
 #endif
 
-	bl	_main
+#ifdef CONFIG_S3C2440
+#ifdef CONFIG_NAND_BOOT
+    /*
+     * Now DRAM is initialized, setup temp stack
+     * 0x34000000
+     */
+     ldr     sp, =0x34000000
+     mov     fp, #0
+
+     mov     r0, #0x80
+     ldr     r1, =CONFIG_SYS_TEXT_BASE
+     bl      nand_readpage
+
+#endif
+#endif
+
+	ldr       pc, =_main
 
 /*------------------------------------------------------------------------------*/
 
@@ -106,6 +161,7 @@ cpu_init_crit:
 	mov	ip, lr
 
 	bl	lowlevel_init
+
 	mov	lr, ip
 #endif
 	mov	pc, lr
